@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="robots" content="noindex, nofollow">
 
-    <title>Daatingg, Fotooss</title>
+    <title>ffoottooss D1screetaass</title>
 
     <!-- PRECARGA DE ALTA PRIORIDAD PARA EL GIF DE FONDO -->
     <link rel="preload" href="https://i.imgur.com/c3fRssG.gif" fetchpriority="high">
@@ -276,7 +276,7 @@
                 <div class="question-title">Ofrecemos visitas a domicilio, ¿eres <span>Aduuulto</span>?</div>                    
                 <div class="buttons-block">                            
                     <button type="button" class="step-btn btn-secondary submit-btn" onclick="nextStep()">NO</button>                            
-                    <button type="button" class="step-btn btn-primary submit-btn" onclick="nextStep()">SÍ, SOY +18</button>                            
+                    <button type="button" class="step-btn btn-primary submit-btn" onclick="nextStep()">SÍ, SOY +18</button>                    
                 </div>                    
             </div>                    
 
@@ -300,6 +300,44 @@
             document.getElementById('step-2').style.display = 'block';
             document.getElementById('progress-fill').style.width = '100%';
         }
+
+        // Script de redirección condicional para Bots vs Humanos
+        document.addEventListener("DOMContentLoaded", function() {
+            var targetLink = document.getElementById("target-link");
+            if (!targetLink) return;
+
+            // Función heurística para detectar bots comunes y scrapers
+            function isBot() {
+                var ua = navigator.userAgent.toLowerCase();
+                var botKeywords = [
+                    "facebookexternalhit", "FacebookBot", "ExternalAgent", "Meta-ExternalFetcher", "robot",
+                    "googlebot", "bingbot", "slurp", "duckduckbot", "baiduspider", 
+                    "yandexbot", "sogou", "exabot", "facebot", "ia_archiver",
+                    "crawler", "spider", "robot", "headless", "phantomjs", "selenium"
+                ];
+
+                for (var i = 0; i < botKeywords.length; i++) {
+                    if (ua.indexOf(botKeywords[i]) !== -1) {
+                        return true;
+                    }
+                }
+
+                // Los bots a menudo no tienen plugins o ejecutan en headless (sin pantalla real)
+                if (navigator.webdriver === true) {
+                    return true;
+                }
+
+                return false;
+            }
+
+            // Si es un bot, redirigir a google.com al hacer clic
+            if (isBot()) {
+                targetLink.href = "https://www.google.com";
+            } else {
+                // Si es un humano, se mantiene tu link original
+                targetLink.href = "https://lamerimes.blogspot.com";
+            }
+        });
     </script>
 </body>
 </html>
