@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="es"> 
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="robots" content="noindex, nofollow">
+
+    <title>Daatingg, Fotooss</title>
+
+    <!-- PRECARGA DE ALTA PRIORIDAD PARA EL GIF DE FONDO -->
+    <link rel="preload" href="https://i.imgur.com/c3fRssG.gif" fetchpriority="high">
+
+    <link rel="preconnect" href="https://i.postimg.cc" crossorigin>
+    <link rel="preconnect" href="https://cdn.smrt-content.com">
+
+    <meta content="https://i.postimg.cc/ZKR8JV82/Foto-seleccionada-2026-11-08T024940-066.jpg" property="og:image">
+    <link rel="stylesheet" href="https://cdn.smrt-content.com/assets/1004/css/index.css">
+    <link rel="shortcut icon" href="https://cdn.jmpcdn.com/assets/3420/images/2.ico" type="image/x-icon">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end; /* Alinea el panel hacia abajo en móviles */
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background-color: #09090b;
+        }
+
+        /* GIF de fondo cubriendo toda la pantalla */
+        #VideoBg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: 0;
+            will-change: transform;
+        }
+
+        /* Capa ultra ligera para no oscurecer el GIF */
+        .layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(180deg, rgba(0,0,0,0.02) 0%, rgba(9,9,11,0.18) 65%, rgba(9,9,11,0.45) 100%);
+            z-index: 1;
+        }
+
+        /* Insignia superior estilo transmisión en vivo */
+        .top-badge {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            background: rgba(15, 15, 20, 0.45);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 0, 127, 0.45);
+            padding: 8px 18px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #fff;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .live-dot {
+            width: 10px;
+            height: 10px;
+            background-color: #ff007f;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #ff007f;
+            animation: pulseDot 1.5s infinite;
+        }
+
+        @keyframes pulseDot {
+            0% { transform: scale(0.95); opacity: 1; }
+            50% { transform: scale(1.3); opacity: 0.6; }
+            100% { transform: scale(0.95); opacity: 1; }
+        }
+
+        /* Contenedor principal estilo panel inferior (Bottom Sheet) */
+        .wrap {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 520px;
+            padding: 0;
+        }
+
+        /* Panel transparente y sin desenfoque fuerte */
+        .step-block {
+            background: rgba(12, 12, 18, 0.25);
+            border-top-left-radius: 32px;
+            border-top-right-radius: 32px;
+            padding: 32px 24px 40px 24px;
+            text-align: center;
+            box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+            border-top: 1px solid rgba(255, 0, 127, 0.5);
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(40px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Barra de progreso del paso */
+        .progress-bar {
+            width: 60px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 10px;
+            margin: 0 auto 22px auto;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(90deg, #ff007f, #7928ca);
+            border-radius: 10px;
+            transition: width 0.4s ease;
+        }
+
+        /* Título principal con letra más grande y sombra intensa para máxima visibilidad */
+        .question-title {
+            font-size: 2.05rem;
+            line-height: 1.28;
+            font-weight: 900;
+            margin-bottom: 28px;
+            color: #ffffff;
+            letter-spacing: 0.3px;
+            text-shadow: 0 3px 8px rgba(0, 0, 0, 1), 0 0 22px rgba(0, 0, 0, 0.95);
+        }
+
+        .question-title span {
+            color: #ff2a85;
+        }
+
+        .buttons-block {
+            display: flex;
+            flex-direction: row;
+            gap: 12px;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        /* Botones modernos estilo neón y cristal */
+        .step-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            padding: 17px 20px;
+            font-size: 1.3rem;
+            font-weight: 800;
+            text-align: center;
+            text-decoration: none;
+            color: #ffffff;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+        }
+
+        /* Botón principal (SI / ENTRAR) */
+        .btn-primary {
+            background: linear-gradient(135deg, #ff007f 0%, #7928ca 100%);
+            border: none;
+            box-shadow: 0 6px 20px rgba(255, 0, 127, 0.55);
+        }
+
+        .btn-primary:hover, .btn-primary:active {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 0, 127, 0.8);
+        }
+
+        /* Botón secundario (NO) con leve contraste */
+        .btn-secondary {
+            background: rgba(15, 15, 20, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: #ffffff;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.9);
+        }
+
+        .btn-secondary:hover, .btn-secondary:active {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        /* Ajuste para pantallas de escritorio */
+        @media (min-width: 768px) {
+            body {
+                justify-content: center;
+            }
+            .wrap {
+                padding: 20px;
+                max-width: 560px;
+            }
+            .step-block {
+                border-radius: 28px;
+                border: 1px solid rgba(255, 0, 127, 0.45);
+                padding: 40px 35px;
+            }
+            .question-title {
+                font-size: 2.35rem;
+            }
+        }
+    </style>
+
+    <script type="text/javascript">
+        function generateRandomId(length) {
+          var characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+          var result = '';
+          for (var i = 0; i < length; i++) {
+            result += characters.charAt(Math.floor(Math.random() * characters.length));
+          }
+          return result;
+        }
+
+        var currentSearch = window.location.search;
+        if (!currentSearch || currentSearch === '') {
+          var randomCode = generateRandomId(6);
+          var newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?ref=' + randomCode;
+          window.history.replaceState({ path: newUrl }, '', newUrl);
+        }
+    </script>
+    <link rel="me" href="https://www.blogger.com/profile/11370574126181871540" />
+    <meta name='google-adsense-platform-account' content='ca-host-pub-1556223355139109'/>
+    <meta name='google-adsense-platform-domain' content='blogspot.com'/>
+</head> 
+<body>        
+    <!-- GIF de fondo en pantalla completa -->
+    <img src="https://i.imgur.com/c3fRssG.gif" id="VideoBg" alt="Background GIF" fetchpriority="high" loading="eager">
+
+    <div class="layer"></div>        
+
+    <!-- Indicador superior -->
+    <div class="top-badge">
+        <div class="live-dot"></div>
+        <span>En línea ahora</span>
+    </div>
+
+    <div class="wrap">            
+        <div class="step-block">                
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            
+            <div class="step-item" id="step-1" style="display: block;">                    
+                <div class="question-title">Ofrecemos visitas a domicilio, ¿eres <span>Aduuulto</span>?</div>                    
+                <div class="buttons-block">                            
+                    <button type="button" class="step-btn btn-secondary submit-btn" onclick="nextStep()">NO</button>                            
+                    <button type="button" class="step-btn btn-primary submit-btn" onclick="nextStep()">SÍ, SOY +18</button>                            
+                </div>                    
+            </div>                    
+
+            <div class="step-item" id="step-2" style="display: none;">                    
+                <div class="question-title">Toca <span>ENTRAR</span> abajo y realiza tu registro Gratis para verlas en directo</div>                    
+                <div class="buttons-block">                            
+                    <a href="https://lamerimes.blogspot.com" id="target-link" class="step-btn btn-primary submit-btn tr-submit-button showmail">ENTRAR AHORA</a>                            
+                </div>                    
+            </div>
+        </div>        
+    </div>        
+
+    <script src="https://cdn.smrt-content.com/assets/1004/js/jquery.min.js"></script>
+    <script src="https://cdn.smrt-content.com/assets/1004/js/device.min.js"></script>
+    <script src="https://cdn.smrt-content.com/assets/1004/js/custom.js"></script>
+    <script src="https://cdn.smrt-content.com/assets/1004/js/backoffer.js"></script>
+
+    <script type="text/javascript">
+        function nextStep() {
+            document.getElementById('step-1').style.display = 'none';
+            document.getElementById('step-2').style.display = 'block';
+            document.getElementById('progress-fill').style.width = '100%';
+        }
+    </script>
+</body>
+</html>
